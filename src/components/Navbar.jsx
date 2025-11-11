@@ -18,13 +18,13 @@ function Navbar({ language, setLanguage }) {
             className={`lang-btn ${language === "th" ? "active" : ""}`}
             onClick={() => setLanguage("th")}
           >
-            🇹🇭 TH
+            TH
           </button>
           <button
             className={`lang-btn ${language === "en" ? "active" : ""}`}
             onClick={() => setLanguage("en")}
           >
-            🇦🇺 EN
+            EN
           </button>
         </div>
       </div>

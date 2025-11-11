@@ -18,7 +18,12 @@ function App() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const roomParam = params.get("room");
-    if (roomParam === "1" || roomParam === "2") {
+    if (
+      roomParam === "1" ||
+      roomParam === "2" ||
+      roomParam === "3" ||
+      roomParam === "4"
+    ) {
       setRoom(`room${roomParam}`);
     }
   }, []);
