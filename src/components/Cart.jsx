@@ -19,9 +19,15 @@ function Cart({
   const roomNames = {
     room1: { th: "ห้องประชุมใหญ่", en: "Large Meeting Room" },
     room2: { th: "ห้องประชุมเล็ก", en: "Small Meeting Room" },
+    room3: { th: "ห้อง 207", en: "Room 207" },
+    room4: { th: "ห้อง 208", en: "Room 208" },
   };
 
   const sendToTelegram = async () => {
+    console.log("Room:", room);
+    console.log("Room Name:", roomNames[room]);
+    console.log("Cart:", cart);
+
     if (cart.length === 0) return;
 
     setSending(true);
@@ -38,12 +44,26 @@ function Cart({
       year: "numeric",
     });
 
-    const roomEmoji = room === "room1" ? "🔵" : "🟡";
-    const roomTitle = room === "room1" ? "Order Room 1" : "Order Room 2";
+    const roomEmoji =
+      room === "room1"
+        ? "🔵"
+        : room === "room2"
+        ? "🟡"
+        : room === "room3"
+        ? "🟢"
+        : "🟣";
+    const roomTitle =
+      room === "room1"
+        ? "Order Room 1"
+        : room === "room2"
+        ? "Order Room 2"
+        : room === "room3"
+        ? "Order Room 3"
+        : "Order Room 4";
 
     let message = `${roomEmoji}${roomTitle}${roomEmoji}\n`;
     message += `_______________\n`;
-    message += `ห้อง: ${roomNames[room].th}\n`;
+    message += `ห้อง: ${roomNames[room]?.th || "ห้องไม่ระบุ"}\n`;
     message += `เวลาสั่ง: ${time}\n`;
     message += `วันที่: ${date}\n`;
     message += `_______________\n`;
@@ -66,16 +86,22 @@ function Cart({
       message += `หมายเหตุ: ${note}\n\n`;
     }
 
-    message += `⚠️กรุณาจัดเตรียมและส่งไปที่${roomNames[room].th}`;
+    message += `⚠️กรุณาจัดเตรียมและส่งไปที่${
+      roomNames[room]?.th || "ห้องไม่ระบุ"
+    }`;
+
+    console.log("Message to send:", message);
 
     try {
-      await axios.post(
+      const response = await axios.post(
         `https://api.telegram.org/bot8371673378:AAHB03X_SXOiNM_kkaoN7ZIlDU2rnCeqTFo/sendMessage`,
         {
           chat_id: "-1003103669661",
           text: message,
         }
       );
+
+      console.log("Telegram Response:", response);
 
       // แสดง popup สำเร็จ
       setShowSuccess(true);
@@ -88,10 +114,11 @@ function Cart({
       }, 3000);
     } catch (error) {
       console.error("Error sending to Telegram:", error);
+      console.error("Error details:", error.response?.data);
       alert(
         language === "th"
-          ? "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง"
-          : "Error occurred. Please try again."
+          ? `เกิดข้อผิดพลาด: ${error.message}`
+          : `Error: ${error.message}`
       );
       setSending(false);
     }
