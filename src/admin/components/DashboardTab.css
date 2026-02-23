@@ -1,0 +1,197 @@
+/* DashboardTab — Full analytics layout (white theme) */
+.dashboard-tab {
+  padding: 1.25rem;
+}
+
+.dt-loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* --- Toolbar --- */
+.dt-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.dt-page-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-heading);
+}
+
+.dt-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.dt-last-updated {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-right: 0.25rem;
+}
+
+.dt-btn {
+  padding: 0.45rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-family: var(--font);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.dt-btn-outline {
+  border: 1px solid var(--border);
+  background: #FFFFFF;
+  color: var(--text);
+}
+
+.dt-btn-outline:hover {
+  border-color: var(--accent-warm);
+  color: var(--accent-warm);
+  background: rgba(196, 169, 106, 0.04);
+}
+
+.dt-btn-accent {
+  border: none;
+  background: var(--accent-warm);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-sm);
+}
+
+.dt-btn-accent:hover {
+  background: var(--accent-hover);
+  box-shadow: var(--shadow-md);
+}
+
+/* --- KPI Grid --- */
+.dt-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 600px) {
+  .dt-kpi-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .dt-kpi-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* --- Inventory chip row --- */
+.dt-inventory-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.dt-inv-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  background: var(--surface2);
+  border: 1px solid var(--border-light);
+  font-size: 0.82rem;
+  color: var(--text);
+}
+
+.dt-inv-chip strong {
+  color: var(--text-heading);
+  font-weight: 700;
+}
+
+.dt-inv-chip-warn {
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+}
+
+.dt-inv-chip-warn strong {
+  color: var(--danger);
+}
+
+/* --- Section titles --- */
+.dt-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: var(--text-heading);
+}
+
+/* --- Recent Items --- */
+.dt-recent-section {
+  margin-top: 1.75rem;
+}
+
+.dt-recent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dt-recent-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.9rem;
+}
+
+.dt-recent-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.dt-recent-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.dt-recent-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-heading);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dt-recent-price {
+  font-size: 0.9rem;
+  color: var(--accent-warm);
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+.dt-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 1.5rem 0;
+}

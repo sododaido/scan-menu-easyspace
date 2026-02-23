@@ -1,0 +1,41 @@
+/* StatCard — White professional KPI card */
+.stat-card {
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  text-align: center;
+}
+
+.stat-card__emoji {
+  font-size: 1.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.stat-card__value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  line-height: 1.1;
+}
+
+.stat-card__suffix {
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-left: 0.15rem;
+  color: var(--text-muted);
+}
+
+.stat-card__label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.stat-card__subtext {
+  font-size: 0.72rem;
+  color: var(--accent-warm);
+  margin-top: 0.05rem;
+  font-weight: 600;
+}

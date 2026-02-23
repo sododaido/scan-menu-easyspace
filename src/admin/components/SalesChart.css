@@ -1,0 +1,142 @@
+/* SalesChart — Line chart + Bar chart (white theme) */
+.sales-chart-section {
+  margin-top: 1.5rem;
+}
+
+.sc-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.sc-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-heading);
+}
+
+.sc-filters {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.sc-filter-btn {
+  padding: 0.35rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #FFFFFF;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sc-filter-btn:hover {
+  background: var(--surface2);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.sc-filter-active {
+  background: var(--accent-warm);
+  color: #FFFFFF;
+  border-color: var(--accent-warm);
+  font-weight: 600;
+}
+
+.sc-filter-active:hover {
+  background: var(--accent-hover);
+  color: #FFFFFF;
+}
+
+.sc-custom-range {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.sc-custom-range label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.sc-date-input {
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #FFFFFF;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-family: var(--font);
+  outline: none;
+}
+
+.sc-date-input:focus {
+  border-color: var(--accent-warm);
+  box-shadow: 0 0 0 2px rgba(196, 169, 106, 0.12);
+}
+
+.sc-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 900px) {
+  .sc-charts-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.sc-chart-card {
+  padding: 1rem;
+}
+
+.sc-chart-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: var(--text-muted);
+}
+
+.sc-no-data {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+/* Custom tooltip — white professional */
+.sc-tooltip {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.sc-tooltip-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 0 0 0.2rem;
+}
+
+.sc-tooltip-value {
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Recharts legend text color override */
+.sales-chart-section .recharts-legend-item-text {
+  color: #9CA3AF !important;
+}

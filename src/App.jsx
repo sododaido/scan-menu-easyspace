@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { menuItems } from "./data/menuData";
+import { useMenuData } from "./hooks/useMenuData";
 import Navbar from "./components/Navbar";
 import CategoryBar from "./components/CategoryBar";
 import MenuItem from "./components/MenuItem";
@@ -13,6 +13,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [room, setRoom] = useState("room1"); // ดึงจาก URL parameter ในภายหลัง
+  const { items: menuItems, loading: menuLoading } = useMenuData();
 
   // ดึงค่า room จาก URL
   useEffect(() => {
@@ -28,10 +29,11 @@ function App() {
     }
   }, []);
 
-  const filteredItems =
+  const filteredItems = (
     category === "all"
       ? menuItems
-      : menuItems.filter((item) => item.category === category);
+      : menuItems.filter((item) => item.category === category)
+  ).filter((item) => item.available !== false);
 
   const addToCart = (item) => {
     const existingItem = cart.find((cartItem) => cartItem.id === item.id);
@@ -41,8 +43,8 @@ function App() {
         cart.map((cartItem) =>
           cartItem.id === item.id
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        )
+            : cartItem,
+        ),
       );
     } else {
       setCart([...cart, { ...item, quantity: 1 }]);
@@ -59,8 +61,8 @@ function App() {
         cart.map((cartItem) =>
           cartItem.id === itemId
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
-            : cartItem
-        )
+            : cartItem,
+        ),
       );
     }
   };
@@ -85,18 +87,32 @@ function App() {
         />
 
         <div className="menu-grid">
-          {filteredItems.map((item) => (
-            <MenuItem
-              key={item.id}
-              item={item}
-              language={language}
-              addToCart={addToCart}
-              removeFromCart={removeFromCart}
-              quantity={
-                cart.find((cartItem) => cartItem.id === item.id)?.quantity || 0
-              }
-            />
-          ))}
+          {menuLoading ? (
+            <div
+              style={{
+                gridColumn: "1/-1",
+                textAlign: "center",
+                padding: "3rem",
+                color: "#888",
+              }}
+            >
+              กำลังโหลดเมนู...
+            </div>
+          ) : (
+            filteredItems.map((item) => (
+              <MenuItem
+                key={item.id}
+                item={item}
+                language={language}
+                addToCart={addToCart}
+                removeFromCart={removeFromCart}
+                quantity={
+                  cart.find((cartItem) => cartItem.id === item.id)?.quantity ||
+                  0
+                }
+              />
+            ))
+          )}
         </div>
       </div>
 

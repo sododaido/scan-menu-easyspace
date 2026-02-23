@@ -1,0 +1,230 @@
+/* MenuTable — Clean white professional theme */
+.menu-table-wrap {
+  padding: 1rem;
+}
+
+.mt-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.mt-search {
+  flex: 1;
+  min-width: 180px;
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #FFFFFF;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-family: var(--font);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.mt-search:focus {
+  border-color: var(--accent-warm);
+  box-shadow: 0 0 0 2px rgba(196, 169, 106, 0.1);
+}
+
+.mt-search::placeholder {
+  color: var(--text-muted);
+}
+
+.mt-filters {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.mt-filter-btn {
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #FFFFFF;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mt-filter-btn:hover {
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.mt-filter-btn.active {
+  background: var(--accent-warm);
+  color: #FFFFFF;
+  border-color: var(--accent-warm);
+  font-weight: 600;
+}
+
+.mt-count {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.mt-table-scroll {
+  overflow-x: auto;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #FFFFFF;
+  box-shadow: var(--shadow-card);
+}
+
+.mt-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.mt-table thead {
+  background: var(--surface2);
+}
+
+.mt-table th {
+  padding: 0.75rem 0.9rem;
+  text-align: left;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.mt-table td {
+  padding: 0.65rem 0.9rem;
+  border-top: 1px solid var(--border-light);
+  vertical-align: middle;
+  color: var(--text);
+}
+
+.mt-row {
+  transition: background 0.15s ease;
+}
+
+.mt-row:hover {
+  background: var(--surface2);
+}
+
+.mt-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.mt-name-th {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-heading);
+}
+
+.mt-name-en {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.mt-price {
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+  color: var(--accent-warm);
+}
+
+.mt-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.mt-badge-drink {
+  background: var(--drink-badge);
+}
+
+.mt-badge-snack {
+  background: var(--snack-badge);
+}
+
+.mt-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.6rem 0.3rem 0.3rem;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: var(--font);
+  transition: background 0.2s ease;
+}
+
+.mt-toggle-on {
+  background: var(--accent-warm);
+  color: #FFFFFF;
+}
+
+.mt-toggle-off {
+  background: #E5E7EB;
+  color: var(--text-muted);
+}
+
+.mt-toggle-knob {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.mt-toggle-label {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.mt-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.mt-btn-edit,
+.mt-btn-delete {
+  padding: 0.35rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #FFFFFF;
+  color: var(--text);
+  font-size: 0.8rem;
+  font-family: var(--font);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.mt-btn-edit:hover {
+  border-color: var(--accent-warm);
+  color: var(--accent-warm);
+  background: rgba(196, 169, 106, 0.05);
+}
+
+.mt-btn-delete:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.mt-empty {
+  text-align: center;
+  padding: 3rem !important;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
