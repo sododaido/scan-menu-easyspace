@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import "./Cart.css";
 
 function Cart({
@@ -24,10 +23,6 @@ function Cart({
   };
 
   const sendToTelegram = async () => {
-    console.log("Room:", room);
-    console.log("Room Name:", roomNames[room]);
-    console.log("Cart:", cart);
-
     if (cart.length === 0) return;
 
     setSending(true);
@@ -44,29 +39,31 @@ function Cart({
       year: "numeric",
     });
 
+    const orderId = String(Date.now());
+
     const roomEmoji =
       room === "room1"
         ? "🔵"
         : room === "room2"
-        ? "🟡"
-        : room === "room3"
-        ? "🟢"
-        : "🟣";
+          ? "🟡"
+          : room === "room3"
+            ? "🟢"
+            : "🟣";
     const roomTitle =
       room === "room1"
         ? "Order Room 1"
         : room === "room2"
-        ? "Order Room 2"
-        : room === "room3"
-        ? "Order Room 3"
-        : "Order Room 4";
+          ? "Order Room 2"
+          : room === "room3"
+            ? "Order Room 3"
+            : "Order Room 4";
 
     let message = `${roomEmoji}${roomTitle}${roomEmoji}\n`;
-    message += `_______________\n`;
+    message += `• • • • • • • • • • • •\n`;
     message += `ห้อง: ${roomNames[room]?.th || "ห้องไม่ระบุ"}\n`;
     message += `เวลาสั่ง: ${time}\n`;
     message += `วันที่: ${date}\n`;
-    message += `_______________\n`;
+    message += `• • • • • • • • • • • •\n`;
     message += `รายการสินค้า\n\n`;
 
     cart.forEach((item, index) => {
@@ -77,10 +74,10 @@ function Cart({
       } ฿\n\n`;
     });
 
-    message += `_______________\n`;
+    message += `• • • • • • • • • • • •\n`;
     message += `จำนวน : ${getTotalItems()} รายการ\n`;
     message += `รวมทั้งสิ้น : ${getTotalPrice()} บาท\n`;
-    message += `_______________\n\n`;
+    message += `• • • • • • • • • • • •\n\n`;
 
     if (note) {
       message += `หมายเหตุ: ${note}\n\n`;
@@ -90,18 +87,21 @@ function Cart({
       roomNames[room]?.th || "ห้องไม่ระบุ"
     }`;
 
-    console.log("Message to send:", message);
-
     try {
-      const response = await axios.post(
-        `https://api.telegram.org/bot8371673378:AAHB03X_SXOiNM_kkaoN7ZIlDU2rnCeqTFo/sendMessage`,
-        {
-          chat_id: "-1003103669661",
-          text: message,
-        }
-      );
+      const response = await fetch("/api/send-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message,
+          orderId,
+          roomName: room,
+        }),
+      });
 
-      console.log("Telegram Response:", response);
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.error || "Failed to send order");
+      }
 
       // แสดง popup สำเร็จ
       setShowSuccess(true);
@@ -113,12 +113,11 @@ function Cart({
         window.location.reload(); // รีเฟรชหน้าเพื่อล้างตะกร้า
       }, 3000);
     } catch (error) {
-      console.error("Error sending to Telegram:", error);
-      console.error("Error details:", error.response?.data);
+      console.error("Error sending order:", error);
       alert(
         language === "th"
           ? `เกิดข้อผิดพลาด: ${error.message}`
-          : `Error: ${error.message}`
+          : `Error: ${error.message}`,
       );
       setSending(false);
     }
@@ -218,8 +217,8 @@ function Cart({
                   ? "กำลังส่ง..."
                   : "Sending..."
                 : language === "th"
-                ? "สั่งเลย"
-                : "Place Order"}
+                  ? "สั่งเลย"
+                  : "Place Order"}
             </button>
           </div>
         )}
