@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useMenuData } from "../../hooks/useMenuData";
 import DashboardTab from "./DashboardTab";
 import MenuTable from "./MenuTable";
 import EditModal from "./EditModal";
 import AddItemTab from "./AddItemTab";
+import Toast from "./Toast";
 import "./AdminDashboard.css";
 
 function AdminDashboard({ onLogout }) {
@@ -11,12 +12,21 @@ function AdminDashboard({ onLogout }) {
   const [activeTab, setActiveTab] = useState(0);
   const [editItem, setEditItem] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [toast, setToast] = useState(null);
 
   const tabs = [
-    { label: "📊 ภาพรวม" },
-    { label: "🗂 จัดการเมนู" },
-    { label: "➕ เพิ่มสินค้า" },
+    { label: " ภาพรวม" },
+    { label: " จัดการเมนู" },
+    { label: " เพิ่มสินค้า" },
   ];
+
+  const showToast = (message, type = "success") => {
+    setToast({ message, type, key: Date.now() });
+  };
+
+  const clearToast = useCallback(() => {
+    setToast(null);
+  }, []);
 
   const handleEdit = (item) => {
     setEditItem(item);
@@ -33,14 +43,15 @@ function AdminDashboard({ onLogout }) {
             category: formData.category,
             image: formData.image,
           }
-        : i
+        : i,
     );
     try {
       await saveMenu(updated);
       setShowEditModal(false);
       setEditItem(null);
+      showToast("แก้ไขรายการสินค้าเรียบร้อย ✅");
     } catch (err) {
-      alert("บันทึกไม่สำเร็จ: " + err.message);
+      showToast("บันทึกไม่สำเร็จ กรุณาลองใหม่ ❌", "error");
     }
   };
 
@@ -48,26 +59,30 @@ function AdminDashboard({ onLogout }) {
     const filtered = items.filter((i) => i.id !== id);
     try {
       await saveMenu(filtered);
+      showToast("ลบรายการสินค้าเรียบร้อย ✅");
     } catch (err) {
-      alert("ลบไม่สำเร็จ: " + err.message);
+      showToast("ลบไม่สำเร็จ กรุณาลองใหม่ ❌", "error");
     }
   };
 
   const handleToggle = async (id) => {
     const updated = items.map((i) =>
-      i.id === id ? { ...i, available: i.available === false ? true : false } : i
+      i.id === id
+        ? { ...i, available: i.available === false ? true : false }
+        : i,
     );
     try {
       await saveMenu(updated);
+      showToast("อัปเดตสถานะเรียบร้อย ✅");
     } catch (err) {
-      alert("อัปเดตไม่สำเร็จ: " + err.message);
+      showToast("อัปเดตไม่สำเร็จ กรุณาลองใหม่ ❌", "error");
     }
   };
 
   return (
     <div className="admin-dashboard">
       <header className="ad-header">
-        <h1 className="ad-logo">🍺 EasySpace Admin</h1>
+        <h1 className="ad-logo"> EasySpace Admin</h1>
         <button className="ad-logout" onClick={onLogout}>
           ออกจากระบบ
         </button>
@@ -91,9 +106,7 @@ function AdminDashboard({ onLogout }) {
         ) : (
           <>
             {error && (
-              <div className="ad-error">
-                ⚠️ โหลดข้อมูลล้มเหลว (ใช้ข้อมูลสำรอง)
-              </div>
+              <div className="ad-error">โหลดข้อมูลล้มเหลว (ใช้ข้อมูลสำรอง)</div>
             )}
 
             {activeTab === 0 && <DashboardTab items={items} />}
@@ -105,7 +118,9 @@ function AdminDashboard({ onLogout }) {
                 onToggle={handleToggle}
               />
             )}
-            {activeTab === 2 && <AddItemTab items={items} saveMenu={saveMenu} />}
+            {activeTab === 2 && (
+              <AddItemTab items={items} saveMenu={saveMenu} />
+            )}
           </>
         )}
       </main>
@@ -118,6 +133,16 @@ function AdminDashboard({ onLogout }) {
             setShowEditModal(false);
             setEditItem(null);
           }}
+        />
+      )}
+
+      {toast && (
+        <Toast
+          key={toast.key}
+          message={toast.message}
+          type={toast.type}
+          duration={2000}
+          onClose={clearToast}
         />
       )}
     </div>

@@ -19,7 +19,8 @@ function EditModal({ item, onSave, onClose }) {
     const errs = {};
     if (!formData.nameTh.trim()) errs.nameTh = "กรุณากรอกข้อมูล";
     if (!formData.nameEn.trim()) errs.nameEn = "กรุณากรอกข้อมูล";
-    if (!formData.price || Number(formData.price) <= 0) errs.price = "ราคาต้องมากกว่า 0";
+    if (!formData.price || Number(formData.price) <= 0)
+      errs.price = "ราคาต้องมากกว่า 0";
     if (!formData.image.trim()) errs.image = "กรุณากรอกข้อมูล";
     else if (!formData.image.startsWith("http")) errs.image = "URL ไม่ถูกต้อง";
     setErrors(errs);
@@ -48,8 +49,10 @@ function EditModal({ item, onSave, onClose }) {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-card" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h2>{isEdit ? "✏️ แก้ไขสินค้า" : "➕ เพิ่มสินค้าใหม่"}</h2>
-          <button className="modal-close" onClick={onClose}>✕</button>
+          <h2>{isEdit ? " แก้ไขสินค้า" : " เพิ่มสินค้าใหม่"}</h2>
+          <button className="modal-close" onClick={onClose}>
+            ✕
+          </button>
         </div>
 
         <form className="modal-form" onSubmit={handleSubmit}>
@@ -61,7 +64,9 @@ function EditModal({ item, onSave, onClose }) {
               onChange={(e) => update("nameTh", e.target.value)}
               placeholder="ชื่อสินค้า (ไทย)"
             />
-            {errors.nameTh && <span className="modal-err">{errors.nameTh}</span>}
+            {errors.nameTh && (
+              <span className="modal-err">{errors.nameTh}</span>
+            )}
           </div>
 
           <div className="modal-field">
@@ -72,7 +77,9 @@ function EditModal({ item, onSave, onClose }) {
               onChange={(e) => update("nameEn", e.target.value)}
               placeholder="Product name (EN)"
             />
-            {errors.nameEn && <span className="modal-err">{errors.nameEn}</span>}
+            {errors.nameEn && (
+              <span className="modal-err">{errors.nameEn}</span>
+            )}
           </div>
 
           <div className="modal-field">
@@ -115,16 +122,18 @@ function EditModal({ item, onSave, onClose }) {
                 onError={() => setImgError(true)}
               />
             )}
-            {imgError && (
-              <p className="modal-img-err">ไม่สามารถโหลดรูปได้</p>
-            )}
+            {imgError && <p className="modal-img-err">ไม่สามารถโหลดรูปได้</p>}
           </div>
 
           <div className="modal-footer">
             <button type="submit" className="modal-btn-save">
               บันทึก
             </button>
-            <button type="button" className="modal-btn-cancel" onClick={onClose}>
+            <button
+              type="button"
+              className="modal-btn-cancel"
+              onClick={onClose}
+            >
               ยกเลิก
             </button>
           </div>

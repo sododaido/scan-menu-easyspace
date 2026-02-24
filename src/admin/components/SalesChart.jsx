@@ -50,7 +50,7 @@ function SalesChart({
     <div className="sales-chart-section">
       {/* Time filter */}
       <div className="sc-header">
-        <h3 className="sc-title">📈 กราฟยอดขาย</h3>
+        <h3 className="sc-title"> กราฟยอดขาย</h3>
         <div className="sc-filters">
           {[
             { key: "today", label: "วันนี้" },

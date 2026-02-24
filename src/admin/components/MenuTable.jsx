@@ -84,7 +84,9 @@ function MenuTable({ items, onEdit, onDelete, onToggle }) {
                   <td>
                     <span
                       className={`mt-badge ${
-                        item.category === "drink" ? "mt-badge-drink" : "mt-badge-snack"
+                        item.category === "drink"
+                          ? "mt-badge-drink"
+                          : "mt-badge-snack"
                       }`}
                     >
                       {item.category === "drink" ? "เครื่องดื่ม" : "ของว่าง"}
@@ -93,7 +95,9 @@ function MenuTable({ items, onEdit, onDelete, onToggle }) {
                   <td>
                     <button
                       className={`mt-toggle ${
-                        item.available !== false ? "mt-toggle-on" : "mt-toggle-off"
+                        item.available !== false
+                          ? "mt-toggle-on"
+                          : "mt-toggle-off"
                       }`}
                       onClick={() => onToggle(item.id)}
                     >
@@ -105,8 +109,11 @@ function MenuTable({ items, onEdit, onDelete, onToggle }) {
                   </td>
                   <td>
                     <div className="mt-actions">
-                      <button className="mt-btn-edit" onClick={() => onEdit(item)}>
-                        ✏️ แก้ไข
+                      <button
+                        className="mt-btn-edit"
+                        onClick={() => onEdit(item)}
+                      >
+                        แก้ไข
                       </button>
                       <button
                         className="mt-btn-delete"
@@ -116,7 +123,7 @@ function MenuTable({ items, onEdit, onDelete, onToggle }) {
                           }
                         }}
                       >
-                        🗑 ลบ
+                        ลบ
                       </button>
                     </div>
                   </td>

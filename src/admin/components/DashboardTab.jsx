@@ -61,10 +61,10 @@ function DashboardTab({ items }) {
             </span>
           )}
           <button className="dt-btn dt-btn-outline" onClick={refresh}>
-            🔄 รีเฟรช
+            รีเฟรช
           </button>
           <button className="dt-btn dt-btn-accent" onClick={handleExportCSV}>
-            📥 ส่งออก CSV
+            ส่งออก CSV
           </button>
         </div>
       </div>
@@ -104,29 +104,23 @@ function DashboardTab({ items }) {
       {/* ── INVENTORY SUMMARY ── */}
       <div className="dt-inventory-row">
         <div className="dt-inv-chip">
-          🛒 สินค้าทั้งหมด <strong>{items.length}</strong>
+          สินค้าทั้งหมด <strong>{items.length}</strong>
         </div>
         <div className="dt-inv-chip">
-          🍺 เครื่องดื่ม{" "}
-          <strong>
-            {items.filter((i) => i.category === "drink").length}
-          </strong>
+          เครื่องดื่ม{" "}
+          <strong>{items.filter((i) => i.category === "drink").length}</strong>
         </div>
         <div className="dt-inv-chip">
-          🍿 ของว่าง{" "}
-          <strong>
-            {items.filter((i) => i.category === "snack").length}
-          </strong>
+          ของว่าง{" "}
+          <strong>{items.filter((i) => i.category === "snack").length}</strong>
         </div>
         <div className="dt-inv-chip">
-          ✅ พร้อมขาย{" "}
-          <strong>
-            {items.filter((i) => i.available !== false).length}
-          </strong>
+          พร้อมขาย{" "}
+          <strong>{items.filter((i) => i.available !== false).length}</strong>
         </div>
         {unavailableCount > 0 && (
           <div className="dt-inv-chip dt-inv-chip-warn">
-            🚫 ซ่อนอยู่ <strong>{unavailableCount}</strong>
+            ซ่อนอยู่ <strong>{unavailableCount}</strong>
           </div>
         )}
       </div>
@@ -151,7 +145,7 @@ function DashboardTab({ items }) {
 
       {/* ── RECENT ITEMS ── */}
       <div className="dt-recent-section">
-        <h3 className="dt-section-title">🆕 สินค้าล่าสุด</h3>
+        <h3 className="dt-section-title"> สินค้าล่าสุด</h3>
         <div className="dt-recent-list">
           {recentItems.map((item) => (
             <div key={item.id} className="dt-recent-item glass-card">

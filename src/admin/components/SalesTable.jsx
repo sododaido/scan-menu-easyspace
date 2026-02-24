@@ -35,7 +35,7 @@ function SalesTable({ productSales }) {
       data = data.filter(
         (p) =>
           p.name.toLowerCase().includes(q) ||
-          (p.nameEn && p.nameEn.toLowerCase().includes(q))
+          (p.nameEn && p.nameEn.toLowerCase().includes(q)),
       );
     }
 
@@ -67,7 +67,7 @@ function SalesTable({ productSales }) {
   return (
     <div className="sales-table-section">
       <div className="st-header">
-        <h3 className="st-title">📋 รายละเอียดยอดขายตามสินค้า</h3>
+        <h3 className="st-title"> รายละเอียดยอดขายตามสินค้า</h3>
         <input
           className="st-search"
           type="text"
@@ -94,10 +94,7 @@ function SalesTable({ productSales }) {
               <th className="st-sortable" onClick={() => handleSort("qty")}>
                 จำนวนขาย{sortIcon("qty")}
               </th>
-              <th
-                className="st-sortable"
-                onClick={() => handleSort("revenue")}
-              >
+              <th className="st-sortable" onClick={() => handleSort("revenue")}>
                 รายได้{sortIcon("revenue")}
               </th>
               <th
@@ -152,7 +149,9 @@ function SalesTable({ productSales }) {
                     <div className="st-percent-bar">
                       <div
                         className="st-percent-fill"
-                        style={{ width: `${Math.min(Number(p.percentOfTotal), 100)}%` }}
+                        style={{
+                          width: `${Math.min(Number(p.percentOfTotal), 100)}%`,
+                        }}
                       />
                       <span>{p.percentOfTotal}%</span>
                     </div>
