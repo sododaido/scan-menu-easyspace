@@ -20,7 +20,7 @@ function BestSellerTable({ top5Products }) {
 
   return (
     <div className="bestseller-section">
-      <h3 className="bs-title">🏆 สินค้าขายดี Top 5</h3>
+      <h3 className="bs-title"> สินค้าขายดี Top 5</h3>
       <div className="bs-list glass-card">
         {top5Products.map((product, index) => (
           <div key={product.id} className="bs-item">

@@ -18,7 +18,8 @@ function AddItemTab({ items, saveMenu }) {
     const errs = {};
     if (!formData.nameTh.trim()) errs.nameTh = "กรุณากรอกข้อมูล";
     if (!formData.nameEn.trim()) errs.nameEn = "กรุณากรอกข้อมูล";
-    if (!formData.price || Number(formData.price) <= 0) errs.price = "ราคาต้องมากกว่า 0";
+    if (!formData.price || Number(formData.price) <= 0)
+      errs.price = "ราคาต้องมากกว่า 0";
     if (!formData.image.trim()) errs.image = "กรุณากรอกข้อมูล";
     else if (!formData.image.startsWith("http")) errs.image = "URL ไม่ถูกต้อง";
     setErrors(errs);
@@ -26,7 +27,13 @@ function AddItemTab({ items, saveMenu }) {
   };
 
   const resetForm = () => {
-    setFormData({ nameTh: "", nameEn: "", price: "", category: "drink", image: "" });
+    setFormData({
+      nameTh: "",
+      nameEn: "",
+      price: "",
+      category: "drink",
+      image: "",
+    });
     setErrors({});
     setImgError(false);
   };
@@ -38,7 +45,8 @@ function AddItemTab({ items, saveMenu }) {
     setSaving(true);
     setBanner(null);
 
-    const newId = items.length > 0 ? Math.max(...items.map((i) => i.id)) + 1 : 1;
+    const newId =
+      items.length > 0 ? Math.max(...items.map((i) => i.id)) + 1 : 1;
     const newItem = {
       id: newId,
       name: { th: formData.nameTh.trim(), en: formData.nameEn.trim() },
@@ -68,7 +76,7 @@ function AddItemTab({ items, saveMenu }) {
 
   return (
     <div className="add-tab">
-      <h2 className="add-tab-title">➕ เพิ่มสินค้าใหม่</h2>
+      <h2 className="add-tab-title"> เพิ่มสินค้าใหม่</h2>
 
       {banner && (
         <div className={`add-banner add-banner-${banner.type}`}>
@@ -144,9 +152,7 @@ function AddItemTab({ items, saveMenu }) {
               onError={() => setImgError(true)}
             />
           )}
-          {imgError && (
-            <p className="add-img-err">ไม่สามารถโหลดรูปได้</p>
-          )}
+          {imgError && <p className="add-img-err">ไม่สามารถโหลดรูปได้</p>}
         </div>
 
         <button type="submit" className="add-submit" disabled={saving}>
