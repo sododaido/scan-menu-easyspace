@@ -9,7 +9,7 @@ function BestSellerTable({ top5Products }) {
   if (!top5Products || top5Products.length === 0) {
     return (
       <div className="bestseller-section">
-        <h3 className="bs-title">🏆 สินค้าขายดี Top 5</h3>
+        <h3 className="bs-title"> สินค้าขายดี Top 5</h3>
         <p className="bs-empty">ยังไม่มีข้อมูลยอดขาย</p>
       </div>
     );
