@@ -2,8 +2,6 @@ import { useState, useEffect, useCallback } from "react";
 import { menuItems as fallbackItems } from "../data/menuData";
 
 const RAW_URL = `https://raw.githubusercontent.com/${import.meta.env.VITE_GITHUB_REPO}/main/${import.meta.env.VITE_GITHUB_FILE}`;
-const API_URL = `https://api.github.com/repos/${import.meta.env.VITE_GITHUB_REPO}/contents/${import.meta.env.VITE_GITHUB_FILE}`;
-const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 export function useMenuData() {
   const [items, setItems] = useState([]);
@@ -33,38 +31,15 @@ export function useMenuData() {
   }, [fetchMenu]);
 
   const saveMenu = async (newItems) => {
-    if (!TOKEN) throw new Error("GitHub token not configured");
-
-    const metaRes = await fetch(API_URL, {
-      headers: {
-        Authorization: `token ${TOKEN}`,
-        Accept: "application/vnd.github+json",
-      },
-    });
-    if (!metaRes.ok) throw new Error("Cannot read file metadata from GitHub");
-    const meta = await metaRes.json();
-
-    const content = btoa(
-      unescape(encodeURIComponent(JSON.stringify(newItems, null, 2)))
-    );
-
-    const updateRes = await fetch(API_URL, {
-      method: "PUT",
-      headers: {
-        Authorization: `token ${TOKEN}`,
-        Accept: "application/vnd.github+json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        message: "Update menu from EasySpace Admin",
-        content,
-        sha: meta.sha,
-      }),
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: newItems }),
     });
 
-    if (!updateRes.ok) {
-      const errData = await updateRes.json();
-      throw new Error(errData.message || "Failed to save menu to GitHub");
+    if (!res.ok) {
+      const errData = await res.json();
+      throw new Error(errData.error || "Failed to save menu");
     }
 
     setItems(newItems);
