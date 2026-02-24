@@ -50,7 +50,7 @@ function AdminDashboard({ onLogout }) {
       setShowEditModal(false);
       setEditItem(null);
       showToast("แก้ไขรายการสินค้าเรียบร้อย ✅");
-    } catch (err) {
+    } catch {
       showToast("บันทึกไม่สำเร็จ กรุณาลองใหม่ ❌", "error");
     }
   };
@@ -60,7 +60,7 @@ function AdminDashboard({ onLogout }) {
     try {
       await saveMenu(filtered);
       showToast("ลบรายการสินค้าเรียบร้อย ✅");
-    } catch (err) {
+    } catch {
       showToast("ลบไม่สำเร็จ กรุณาลองใหม่ ❌", "error");
     }
   };
@@ -74,7 +74,7 @@ function AdminDashboard({ onLogout }) {
     try {
       await saveMenu(updated);
       showToast("อัปเดตสถานะเรียบร้อย ✅");
-    } catch (err) {
+    } catch {
       showToast("อัปเดตไม่สำเร็จ กรุณาลองใหม่ ❌", "error");
     }
   };
